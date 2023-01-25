@@ -2,7 +2,6 @@ const uuid = require('uuid')
 const path = require('path')
 const { Device, DeviceInfo } = require('../models/models')
 const ApiError = require('../error/ApiError')
-const axios = require('axios')
 const  { Op, Sequelize } = require("sequelize");
 
 class DeviceController {
@@ -48,26 +47,6 @@ class DeviceController {
         if (brandId && typeId) {
             devices = await Device.findAndCountAll( {where:{typeId, brandId}, limit, offset, attributes: {exclude: ['html', 'variations', 'sliderImg']},})
         }
-        return res.json(devices)
-    }
-
-    async getAllByType(req, res) { 
-        let {limit, page } = req.query
-        let { id } = req.params
-        page = page || 1
-        limit = limit || 10
-        let offset = page * limit - limit
-        const devices = await Device.findAndCountAll({  
-            where: {
-              typeId: id  
-            }, 
-            limit, offset,
-            attributes: {
-                exclude: ['html', 'variations', 'sliderImg']
-            }, 
-        })
-
-
         return res.json(devices)
     }
 

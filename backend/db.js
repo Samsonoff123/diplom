@@ -19,8 +19,6 @@ module.exports = new Sequelize(
             rejectUnauthorized: false // This line will fix new error
           }
         },
-        
-        // заготовка для деплоя
     }
     
     

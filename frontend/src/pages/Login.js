@@ -11,13 +11,13 @@ export default function Login() {
       email,
       password
     });
-    axios.post('http://10.0.2.2/api/user/login', {
+    axios.post('https://diplom-navy.vercel.app/api/user/login', {
       email,
       password
     }).then((res) => {
-      console.log(res)
+      console.log("res:", res)
     }).catch((e) => {
-      console.log(e)
+      console.log("cath", e.response.data)
     })
   }
   
