@@ -1,10 +1,10 @@
 {
-  "name": "tg-web-app__database",
+  "name": "diplom_backend",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
