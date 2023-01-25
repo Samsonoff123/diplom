@@ -12,13 +12,13 @@ module.exports = new Sequelize(
         host: process.env.DB_HOST,
         port: process.env.DB_PORT,
         dialect: 'postgres',
-        // dialectModule: pg,
-        // dialectOptions: {
-        //   ssl: {
-        //     require: true, // This will help you. But you will see nwe error
-        //     rejectUnauthorized: false // This line will fix new error
-        //   }
-        // },
+        dialectModule: pg,
+        dialectOptions: {
+          ssl: {
+            require: true, // This will help you. But you will see nwe error
+            rejectUnauthorized: false // This line will fix new error
+          }
+        },
         
         // заготовка для деплоя
     }
