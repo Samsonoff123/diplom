@@ -26,8 +26,8 @@ export default function Index() {
         <Routes>
             <Route path="/" element={!isAuth ? <Login /> : <Product isAuth={isAuth} />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/reg" element={<Registration />} />
+            <Route path="/login" element={!isAuth ? <Login /> : <Product isAuth={isAuth} />} />
+            <Route path="/reg" element={!isAuth ? <Registration /> : <Product isAuth={isAuth} />} />
         </Routes>
         {
           isAuth ? 

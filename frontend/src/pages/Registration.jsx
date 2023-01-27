@@ -2,6 +2,9 @@ import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity, ScrollView
 import { styles } from '../../global.style'
 import { Link } from 'react-router-native';
 import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { fetchUser } from '../redux/slices/login';
+import { useDispatch } from 'react-redux';
 
 export default function Registration() {
     const botName = "botName"
@@ -16,6 +19,8 @@ export default function Registration() {
     const [fourthMessage, setFourthMessage] = useState(false)
     const [password, setPassword] = useState(false)
     const [finish, setFinish] = useState(false)
+
+    const dispatch = useDispatch()
 
     useEffect(() => {
         setTimeout(() => {
@@ -37,7 +42,7 @@ export default function Registration() {
                 setThirdMessage('Напишите email к которому будет привязана ваша учетная запись')
             }, 500);
         } else if (i === 3) {
-            setEmail(tempMessage)
+            setEmail(tempMessage.includes('@') ? tempMessage : tempMessage + '@mail.ru')
             setTimeout(() => {
                 setFourthMessage('Придумайте пароль')
             }, 500);
@@ -46,6 +51,24 @@ export default function Registration() {
             setTimeout(() => {
                 setFinish('Подождите пока мы зарегестрируем вас')
             }, 500);
+
+            axios.post(`https://diplom-navy.vercel.app/api/user/registration`, {
+                email,
+                password: tempMessage,
+                name,
+                age,
+            }).then((res) => {
+                console.log(res.data);
+
+                dispatch(fetchUser({
+                    email,
+                    password: tempMessage,
+                }))
+            }).catch((e) => {
+                console.log(e);
+                alert('Не удалось вас зарегестрировать')
+
+            })
         }
         setTempMessage('')
         setI(i + 1)
@@ -109,7 +132,7 @@ export default function Registration() {
                     email ? 
                     <View style={styles.member__message}>
                         <View style={styles.message__cloud}>
-                            <Text>{email.includes('@') ? email : email + '@mail.ru'}</Text>
+                            <Text>{email}</Text>
                         </View>
                         <Text> :Вы</Text>
                     </View> : null

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { fetchUser } from '../redux/slices/devices';
+import { fetchUser } from '../redux/slices/login';
 import { styles } from '../../global.style'
 import { Link } from 'react-router-native';
 
