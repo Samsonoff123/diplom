@@ -10,22 +10,24 @@ import { Svg, Path } from 'react-native-svg';
 import Profile from './Profile';
 
 export default function Index() {
-  const token = useSelector(store => store.users.users.items.token)
-
+  const userItem = useSelector(store => store.users.items)
+  const [token, setToken] = useState()
   const [isAuth, setIsAuth] = useState(false)
   
   useEffect(()=>{
-    if (token) {
+    setIsAuth(false)
+    if (userItem) {
         setIsAuth(true)
+        setToken(userItem.token)
         alert('Вы успешно вошли')
     }
-  }, [token])
+  }, [userItem])
 
   return (
       <NativeRouter>
         <Routes>
             <Route path="/" element={!isAuth ? <Login /> : <Product isAuth={isAuth} />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile" element={!userItem ? <Login /> :<Profile user={userItem} />} />
             <Route path="/login" element={!isAuth ? <Login /> : <Product isAuth={isAuth} />} />
             <Route path="/reg" element={!isAuth ? <Registration /> : <Product isAuth={isAuth} />} />
         </Routes>

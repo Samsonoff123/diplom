@@ -75,6 +75,14 @@ export const styles = StyleSheet.create({
       text: {
         fontSize: 16,
       },
+      text__profile: {
+        fontSize: 16,
+        marginBottom: 5,
+      },
+      text__b: {
+        fontSize: 16,
+        fontWeight: 'bold',
+      },
       text__bold: {
         fontSize: 18,
         fontWeight: 'bold',
@@ -156,6 +164,24 @@ export const styles = StyleSheet.create({
       },
       bot__name: {
 
+      },
+      image__holder: {
+        width: 200,
+        height: 200,
+        marginBottom: 5,
+      },
+      wrapper: {
+        width: '100%',
+        height: 500,
+      },
+      slide: {
+        width: '100%',
+        height: 500,
+      },
+      slide__image: {
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover'
       }
       
 });

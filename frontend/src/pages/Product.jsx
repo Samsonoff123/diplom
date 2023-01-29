@@ -1,25 +1,33 @@
-import { StyleSheet, Text, View, Button } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
-import { Link } from "react-router-native";
+import { StyleSheet, Text, View, Button, Image } from 'react-native';
+import Swiper from 'react-native-swiper';
 import { styles } from '../../global.style';
 
 export default function Product({isAuth}) {
 
-    if (!isAuth) {
-        return (
-            <View style={styles.container}>
-                <Text style={{marginBottom: 20}}>Прежде чем начать, пожалуиста войдите или зарегестрируйте свою учетную запись</Text>
-                <Link style={styles.button} to="/login">
-                    <Text style={styles.button__text}>login</Text>
-                </Link>
-            </View>
-            )
-    }
-
     return (
         <View style={styles.container}>
+
+            <Swiper style={styles.wrapper} showsButtons={true}>
+                <View style={styles.slide}>
+                    <Image
+                        style={styles.slide__image}
+                        source={require(`../assets/slide0.jpg`)} 
+                    />
+                </View>
+                <View style={styles.slide}>
+                    <Image
+                        style={styles.slide__image}
+                        source={require(`../assets/slide1.jpg`)} 
+                    />
+                </View>
+                <View style={styles.slide}>
+                    <Image
+                        style={styles.slide__image}
+                        source={require(`../assets/slide2.jpg`)} 
+                    />
+                </View>
+            </Swiper>
             <Text>product page</Text>
-            <StatusBar style="auto" />
         </View>
     )
 }

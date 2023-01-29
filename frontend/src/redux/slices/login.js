@@ -15,7 +15,7 @@ export const fetchUser = createAsyncThunk('user/fetchUser', async ({email, passw
 
 const initialState = {
     users: {
-        items: [],
+        items: false,
         status: 'loading',
     }
 }
@@ -23,21 +23,27 @@ const initialState = {
 const userSlice = createSlice({
     name: 'users',
     initialState,
-    reducer: {},
+    reducers: {
+        logout: (state) => {
+            state.items = false
+        }
+    },
     extraReducers: {
         [fetchUser.pending] : (state)=>{
-            state.users.items = []
-            state.users.status = 'loading'
+            state.items = false
+            state.status = 'loading'
         },
         [fetchUser.fulfilled] : (state, action)=>{
-            state.users.items = action.payload
-            state.users.status = 'loaded'
+            state.items = action.payload
+            state.status = 'loaded'
         },
         [fetchUser.rejected] : (state)=>{
-            state.users.items = []
-            state.users.status = 'error'
+            state.items = false
+            state.status = 'error'
         },
     }
 })
 
 export const usersReducer = userSlice.reducer
+
+export const { logout } = userSlice.actions

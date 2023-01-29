@@ -27,6 +27,9 @@ export default function Login() {
           email,
           password,
         }))
+        if (data.error) {
+          alert('Неправильный логин или пароль')
+        }
       }
     }
   }
