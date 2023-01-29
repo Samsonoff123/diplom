@@ -7,7 +7,7 @@ export default function Product({isAuth}) {
     return (
         <View style={styles.container}>
 
-            <Swiper style={styles.wrapper} showsButtons={true}>
+            {/* <Swiper style={styles.wrapper} showsButtons={true}>
                 <View style={styles.slide}>
                     <Image
                         style={styles.slide__image}
@@ -26,7 +26,7 @@ export default function Product({isAuth}) {
                         source={require(`../assets/slide2.jpg`)} 
                     />
                 </View>
-            </Swiper>
+            </Swiper> */}
             <Text>product page</Text>
         </View>
     )
