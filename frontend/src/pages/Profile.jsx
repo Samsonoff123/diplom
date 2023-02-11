@@ -4,11 +4,13 @@ import { styles } from '../../global.style'
 import { launchImageLibrary } from 'react-native-image-picker'
 import { useDispatch } from 'react-redux';
 import { logout } from '../redux/slices/login';
+import { useNavigate } from 'react-router-native';
 
 export default function Profile({user}) {
     const [age, setAge] = useState(0)
     const [image, setImage] = useState(false)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     useEffect(() => {
         if (user.user.age) {
@@ -53,10 +55,11 @@ export default function Profile({user}) {
 
     const handleExit = () => {
         dispatch(logout())
+        navigate('/')
     }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { paddingTop: 50 }]}>
         <Text style={styles.text__bold}>Профиль</Text>
         {
             user.user ? 

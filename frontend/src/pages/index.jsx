@@ -1,13 +1,14 @@
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import Login from './Login';
 import Product from './Product';
 import Registration from './Registration'
 import { NativeRouter, Route, Link, Routes } from "react-router-native";
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { styles } from '../../global.style'
-import { Svg, Path } from 'react-native-svg';
 import Profile from './Profile';
+import StartPage from './StartPage';
+import Header from '../components/Header'
+import ToastManager, { Toast } from 'toastify-react-native';
 
 export default function Index() {
   const userItem = useSelector(store => store.users.items)
@@ -19,53 +20,37 @@ export default function Index() {
     if (userItem) {
         setIsAuth(true)
         setToken(userItem.token)
-        alert('Вы успешно вошли')
+        Toast.success('Вы успешно вошли')
     }
   }, [userItem])
+ 
+  if (!isAuth) {
+    return (
+      <NativeRouter>
+        <ToastManager />
+        <View style={{ backgroundColor: 'white', height: '100%'}}>
+          <Routes>
+                <Route path="/" element={<StartPage />} />
+                <Route path="*" element={<Login />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/reg" element={<Registration />} />
+            </Routes>
+        </View>
+      </NativeRouter>
+    )
+  }
 
   return (
       <NativeRouter>
-        <Routes>
-            <Route path="/" element={!isAuth ? <Login /> : <Product isAuth={isAuth} />} />
-            <Route path="/profile" element={!userItem ? <Login /> :<Profile user={userItem} />} />
-            <Route path="/login" element={!isAuth ? <Login /> : <Product isAuth={isAuth} />} />
-            <Route path="/reg" element={!isAuth ? <Registration /> : <Product isAuth={isAuth} />} />
-        </Routes>
-        {
-          isAuth ? 
-          <View style={styles.header}>
-          <Link style={styles.header__link} to="/">
-            <Svg style={styles.header__text} xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home-2" width="50" height="50" viewBox="0 0 24 24" stroke-width="2" stroke="#85586F" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <Path stroke="none" d="M0 0h24v24H0z" fill="none"></Path>
-              <Path d="M5 12l-2 0l9 -9l9 9l-2 0"></Path>
-              <Path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7"></Path>
-              <Path d="M10 12h4v4h-4z"></Path>
-            </Svg>
-          </Link>
-          {
-            !isAuth &&
-            <Link style={styles.header__link} to="/login">
-              <Svg style={styles.header__text} xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-login" width="50" height="50" viewBox="0 0 24 24" stroke-width="2" stroke="#85586F" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <Path stroke="none" d="M0 0h24v24H0z" fill="none"></Path>
-                <Path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"></Path>
-                <Path d="M20 12h-13l3 -3m0 6l-3 -3"></Path>
-              </Svg>
-            </Link>
-          }
-          {
-            isAuth &&
-            <Link style={styles.header__link} to="/profile">
-              <Svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-circle" width="50" height="50" viewBox="0 0 24 24" stroke-width="2" stroke="#85586F" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <Path stroke="none" d="M0 0h24v24H0z" fill="none"></Path>
-                <Path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></Path>
-                <Path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></Path>
-                <Path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855"></Path>
-              </Svg>
-            </Link>
-          }
-        </View>
-        : null
-        }
+        <ToastManager />
+        <ScrollView style={{ backgroundColor: 'white', height: '80%'}}>
+          <Routes>
+              <Route path="*" element={<Product isAuth={isAuth} />} />
+              <Route path="/profile" element={<Profile user={userItem} />} />
+          </Routes>
+        </ScrollView>
+
+        <Header isAuth={isAuth}></Header>
 
       </NativeRouter>
   );
