@@ -9,6 +9,10 @@ import Profile from './Profile';
 import StartPage from './StartPage';
 import Header from '../components/Header'
 import ToastManager, { Toast } from 'toastify-react-native';
+import Games from './Games';
+import Tests from './Tests';
+import ProductList from './ProductList';
+import ProductCard from './ProductCard';
 
 export default function Index() {
   const userItem = useSelector(store => store.users.items)
@@ -47,6 +51,10 @@ export default function Index() {
           <Routes>
               <Route path="*" element={<Product isAuth={isAuth} />} />
               <Route path="/profile" element={<Profile user={userItem} />} />
+              <Route path="/games" element={<Games />} />
+              <Route path="/tests" element={<Tests />} />
+              <Route path="/products" element={<ProductList />} />
+              <Route path="/products/:id" element={<ProductCard />} />
           </Routes>
         </ScrollView>
 

@@ -297,7 +297,7 @@ export const styles = StyleSheet.create({
   products: {
     padding: 20,
     width: '100%',
-    backgroundColor: 'rgba(119, 31, 152, 0.63)',
+    backgroundColor: 'rgba(119, 31, 152, 0.3)',
     display: 'flex',
     justifyContent: 'center'
   },
@@ -317,5 +317,179 @@ export const styles = StyleSheet.create({
   },
   products__text__purple: {
     opacity: 0.5,
-  }
+  },
+  games__page: {
+
+  },
+  games__header: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 20,
+    paddingBottom: 10,
+    paddingTop: 30,
+    backgroundColor: 'rgba(119, 31, 152, 0.3)'
+  },
+  games__body: {
+    padding: 20,
+    overflow: 'scroll',
+    height: '100%',
+    backgroundColor: 'rgba(119, 31, 152, 0.1)'
+  },
+  games__message__input: {
+    padding: 20,
+    paddingTop: 20,
+    backgroundColor: '#fff',
+    borderRadius: 15
+  },
+  games__text: {
+    display: 'block',
+    borderRadius: 20,
+    borderColor: 'transparent',
+    borderWidth: 3,
+    paddingLeft: 5,
+    paddingRight: 5,
+    fontWeight: '400',
+    fontSize: 25,
+    lineHeight: 38,
+    marginTop: 20,
+    marginBottom: 20,
+    color: '#000000',
+    textAlign: 'center'
+  },
+  games__text__active: {
+    borderColor: 'white',
+    borderWidth: 3
+  },
+  carousel: {
+    borderRadius: 25,
+    height: 200,
+    marginBottom: 20,
+    overflow: 'hidden',
+    position: 'relative'
+  },
+  carousel__text_answer: {
+    fontSize: 35,
+    padding: 20,
+    color: '#fff'
+  },
+  carousel__text: {
+    fontSize: 21,
+    padding: 20,
+    color: '#fff'
+  },
+  carousel__image: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    width: '100%',
+    height: 130,
+    zIndex: -1,
+    resizeMode: 'contain'
+  },
+  products__icon: {
+    width: 50,
+    height: 50,
+    margin: 0,
+  },
+  products__icon__text: {
+    fontSize: 25,
+    lineHeight: 38,
+    color: '#000000',
+    textAlign: 'center'
+  },
+  products__bottom_img: {
+    backgroundColor: 'rgba(119, 31, 152, 0.3)',
+    width: '100%',
+    height: 200,
+    transform: [{translateY: -15}],
+    marginBottom: -15
+  },
+  tests: {
+    padding: 20,
+    paddingTop: 40,
+    backgroundColor: 'rgba(119, 31, 152, 0.3)',
+  },
+  progress: {
+    height: 10,
+    borderRadius: 30,
+    backgroundColor: 'rgb(232, 232, 232)',
+    marginBottom: 10
+  },
+  progress__inner: {
+    height: '100%',
+    borderRadius: 30,
+    width: '80%',
+    backgroundColor: 'rgb(18, 231, 48)',
+  },
+  result: {
+    textAlign: 'center',
+    padding: 20,
+  },
+  test_main: {
+    marginTop: 20,
+    backgroundColor: 'rgb(177, 88, 210)',
+    padding: 20,
+    borderRadius: 20
+  },
+  test_title: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#fff'
+  },
+  test_answer_main: {
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  test_answer: {
+    fontSize: 22,
+    color: '#fff'
+  },
+  buttons: {
+    marginTop: 10,
+    display: 'flex',
+    flexDirection: 'row',
+    gap: 10,
+    zIndex: -1,
+  },
+  test_element_main: {
+    display: 'flex',
+    justifyContent: 'center',
+    borderBottomColor: '#fff',
+    borderBottomWidth: 3,
+    paddingBottom: 20,
+  },
+  questions__image: {
+    width: '100%',
+    height: 200,
+    resizeMode: 'contain',
+    marginBottom: -25,
+    zIndex: -1
+  },
+  result__text: {
+    color: '#fff',
+    fontSize: 20
+  },
+  question__button: {
+    borderWidth: 1,
+    borderColor: '#fff',
+    marginTop: 5,
+    padding: 5,
+    borderRadius: 10
+  },
+  products__button: {
+    padding: 5,
+    margin: 5,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: '#fff',
+    width: 200,
+    alignSelf: 'center',
+    backgroundColor: 'rgba(119, 31, 152, 0.1)'
+  },
+  products__icon_main: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
