@@ -9,6 +9,7 @@ router.post('/registration', userController.registration)
 router.post('/login', userController.login)
 router.get('/auth', authMiddleware, userController.check)
 router.get('/profile/:email', userController.getProfile)
+router.get('/getAll', userController.getAllDescriptions)
 router.put('/profile', userController.updateImage)
 
 module.exports = router

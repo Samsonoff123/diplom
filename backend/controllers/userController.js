@@ -52,7 +52,6 @@ class UserController {
     async getProfile(req, res) {
         const {email} = req.params
 
-        console.log(email);
         const user = await User.findOne(
             {
                 where: {email},
@@ -62,14 +61,20 @@ class UserController {
     }
 
     async sendDescriptions(req, res) {
-        const {text, userId} = req.params
+        const {text, userId} = req.body
         const user = await User.findOne(
             {
                 where: {id: userId},
             }
         )
-        const descriptions = await Descriptions.create({text, userId, user })
+        const descriptions = await Descriptions.create({text, user })
             
+        return res.json(descriptions)
+    }
+
+    async getAllDescriptions(req, res) {
+        const descriptions = await Descriptions.findAll()
+
         return res.json(descriptions)
     }
 
