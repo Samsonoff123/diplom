@@ -1,7 +1,7 @@
 const ApiError = require('../error/ApiError');
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const { User } = require('../models/models')
+const { User, Descriptions } = require('../models/models')
 
 const generateJwt = (id, email, role) => {
     return jwt.sign(
@@ -50,7 +50,6 @@ class UserController {
     }
 
     async getProfile(req, res) {
-        console.log("getProf");
         const {email} = req.params
 
         console.log(email);
@@ -60,6 +59,18 @@ class UserController {
             }
         )
         return res.json({user})
+    }
+
+    async sendDescriptions(req, res) {
+        const {text, userId} = req.params
+        const user = await User.findOne(
+            {
+                where: {id: userId},
+            }
+        )
+        const descriptions = await Descriptions.create({text, userId, user })
+            
+        return res.json(descriptions)
     }
 
     async updateImage(req, res) {

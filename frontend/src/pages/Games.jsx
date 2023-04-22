@@ -14,12 +14,12 @@ import { useEffect } from "react";
 import WebView from "react-native-webview";
 import Carousel from 'react-native-snap-carousel';
 
+
 const INJECTEDJAVASCRIPT = `document.getElementsByTagName("video")[0].removeAttribute("autoplay"); const meta = document.createElement('meta'); meta.setAttribute('content', 'width=device-width, initial-scale=0.5, maximum-scale=0.5, user-scalable=0'); meta.setAttribute('name', 'viewport'); document.getElementsByTagName('head')[0].appendChild(meta);`
 
 export default function Games() {
   const [message, setMessage] = useState("");
   const [tab, setTab] = useState("Video")
-  const [sound, setSound] = useState();
 
   const content = {
     video: {
@@ -140,7 +140,8 @@ export default function Games() {
   }, [tab])
 
   const handleClick = () => {
-    setMessage("");
+    
+    setMessage("")
   };
   return (
     <View style={styles.games__page}>
@@ -152,7 +153,7 @@ export default function Games() {
               tab === "Video" && styles.games__text__active,
             ]}
           >
-            Video
+            Видео
           </Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setTab("Audio")}>
@@ -162,7 +163,7 @@ export default function Games() {
               tab === "Audio" && styles.games__text__active,
             ]}
           >
-            Audio
+            Аудио
           </Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setTab("Cards")}>
@@ -172,7 +173,7 @@ export default function Games() {
               tab === "Cards" && styles.games__text__active,
             ]}
           >
-            Cards
+            Карты
           </Text>
         </TouchableOpacity>
       </View>

@@ -425,39 +425,48 @@ export const styles = StyleSheet.create({
   result: {
     textAlign: 'center',
     padding: 20,
+    width: '100%',
   },
   test_main: {
-    marginTop: 20,
-    backgroundColor: 'rgb(177, 88, 210)',
+    display: 'flex',
+    justifyContent: 'center',
+    backgroundColor: '#fff',
     padding: 20,
-    borderRadius: 20
+    borderRadius: 20,
   },
   test_title: {
     fontSize: 22,
     fontWeight: 'bold',
-    color: '#fff'
+    color: 'black'
   },
   test_answer_main: {
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    marginTop: 20
   },
   test_answer: {
     fontSize: 22,
-    color: '#fff'
+    color: 'black'
   },
   buttons: {
+    width: '100%',
     marginTop: 10,
     display: 'flex',
     flexDirection: 'row',
+    justifyContent: 'space-between',
     gap: 10,
     zIndex: -1,
   },
   test_element_main: {
     display: 'flex',
     justifyContent: 'center',
-    borderBottomColor: '#fff',
-    borderBottomWidth: 3,
     paddingBottom: 20,
+    height: 550
+  },
+  tests_header: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
   questions__image: {
     width: '100%',
@@ -472,8 +481,8 @@ export const styles = StyleSheet.create({
   },
   question__button: {
     borderWidth: 1,
-    borderColor: '#fff',
-    marginTop: 5,
+    borderColor: 'black',
+    marginTop: 20,
     padding: 5,
     borderRadius: 10
   },

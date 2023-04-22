@@ -12,6 +12,13 @@ const User = sequelize.define('user', {
     role: {type: DataTypes.STRING, defaultValue: "USER"},
 })
 
+const Descriptions = sequelize.define('descriptions', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    text: {type: DataTypes.STRING},
+    userId: {type: DataTypes.INTEGER},
+    user: {type: DataTypes.JSON}
+})
+
 const Device = sequelize.define('device', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     name: {type: DataTypes.STRING, unique: false, allowNull: false},
@@ -30,6 +37,7 @@ const Device = sequelize.define('device', {
 module.exports = {
     User,
     Device,
+    Descriptions
 }
 
 

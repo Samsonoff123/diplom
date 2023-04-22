@@ -111,7 +111,7 @@ const questions1 = [
     title: "I never met a politician _____________ .",
     variants: ["before", "already", "after", "ago"],
     correct: 0,
-  }
+  },
 ];
 
 const questions2 = [
@@ -330,7 +330,7 @@ const questions3 = [
     title: "Have you _____________ tried rock climbing?",
     variants: ["always", "ever", "soon", "never"],
     correct: 1,
-  }
+  },
 ];
 
 function TestsElement({ questions }) {
@@ -365,7 +365,11 @@ function TestsElement({ questions }) {
             <Text style={styles.test_title}>{question.title}</Text>
             <View style={styles.test_answer_main}>
               {question.variants.map((e, id) => (
-                <TouchableOpacity style={styles.question__button} onPress={() => onClickVariant(id)} key={id}>
+                <TouchableOpacity
+                  style={styles.question__button}
+                  onPress={() => onClickVariant(id)}
+                  key={id}
+                >
                   <Text style={styles.test_answer}>
                     {id + 1}) {e}
                   </Text>
@@ -377,37 +381,75 @@ function TestsElement({ questions }) {
       ) : (
         <View style={styles.result}>
           <Text style={styles.result__text}>
-            Вы отгадали {correct} ответа из {questions.length}
+            Нәтиже {correct} \ {questions.length}
           </Text>
-          <Image style={styles.questions__image} source={(correct < 5 ) ? require('../assets/sheldon.png') : (correct < 10 ) ? require('../assets/sheldon2.png') : (correct < 15 ) ? require('../assets/sheldon3.png'): require('../assets/sheldon4.png')} />
+          <Image
+            style={styles.questions__image}
+            source={
+              correct < 5
+                ? require("../assets/sheldon.png")
+                : correct < 10
+                ? require("../assets/sheldon2.png")
+                : correct < 15
+                ? require("../assets/sheldon3.png")
+                : require("../assets/sheldon4.png")
+            }
+          />
           <View style={styles.buttons}>
-            <TouchableOpacity
-              style={[styles.button, { width: 180, marginRight: 10 }]}
-              onPress={handleClick}
-            >
+            <TouchableOpacity style={[styles.button]} onPress={handleClick}>
               <Text style={styles.button__text}>Кайтадан</Text>
             </TouchableOpacity>
-            <TouchableOpacity
-              style={[styles.button, { width: 180 }]}
-              onPress={handleClick}
-            >
+            <TouchableOpacity style={[styles.button]} onPress={handleClick}>
               <Text style={styles.button__text}>Нәтиженi жіберу</Text>
             </TouchableOpacity>
           </View>
         </View>
       )}
-
     </View>
   );
 }
 
 export default function Tests() {
+  const [tab, setTab] = useState("test1");
   return (
-    <View style={styles.tests}>
-      <Text style={styles.h3}>Tests</Text>
-      <TestsElement questions={questions1} />
-      <TestsElement questions={questions2} />
-      <TestsElement questions={questions3} />
+    <View>
+      <View style={[styles.games__header, {paddingTop: 90}]}>
+        <TouchableOpacity onPress={() => setTab("test1")}>
+          <Text
+            style={[
+              styles.games__text,
+              tab === "test1" && styles.games__text__active,
+            ]}
+          >
+            Жеңіл
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => setTab("test2")}>
+          <Text
+            style={[
+              styles.games__text,
+              tab === "test2" && styles.games__text__active,
+            ]}
+          >
+            Орташа
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => setTab("test3")}>
+          <Text
+            style={[
+              styles.games__text,
+              tab === "test3" && styles.games__text__active,
+            ]}
+          >
+            Қиын
+          </Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.tests}>
+        {tab === "test1" && <TestsElement questions={questions1} />}
+        {tab === "test2" && <TestsElement questions={questions2} />}
+        {tab === "test3" && <TestsElement questions={questions3} />}
+      </View>
     </View>
   );
 }
