@@ -9,6 +9,7 @@ const User = sequelize.define('user', {
     name: {type: DataTypes.STRING},
     age: {type: DataTypes.STRING},
     img: {type: DataTypes.STRING, defaultValue: ""},
+    level: {type: DataTypes.STRING},
     role: {type: DataTypes.STRING, defaultValue: "USER"},
 })
 
