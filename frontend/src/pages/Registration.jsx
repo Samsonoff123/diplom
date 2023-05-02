@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity, ScrollView, KeyboardAvoidingView } from 'react-native';
 import { styles } from '../../global.style'
 import { Link, useNavigate } from 'react-router-native';
 import { useEffect, useState } from 'react';
@@ -175,10 +175,9 @@ export default function Registration() {
 
             </ScrollView>
             </View>
-    
         </View>
             <View style={styles.bottom__side}>
-                <TextInput value={tempMessage} onChange={e => setTempMessage(e.nativeEvent.text)} placeholder="Type here..." style={styles.message__input} />
+            <TextInput value={tempMessage} onChange={e => setTempMessage(e.nativeEvent.text)} placeholder="Type here..." style={styles.message__input} />
                 <TouchableOpacity
                     style={styles.button}
                     onPress={handleClick}

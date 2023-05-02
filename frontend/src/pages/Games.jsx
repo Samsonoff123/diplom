@@ -13,6 +13,8 @@ import { useState } from "react";
 import { useEffect } from "react";
 import WebView from "react-native-webview";
 import Carousel from 'react-native-snap-carousel';
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 
 const INJECTEDJAVASCRIPT = `document.getElementsByTagName("video")[0].removeAttribute("autoplay"); const meta = document.createElement('meta'); meta.setAttribute('content', 'width=device-width, initial-scale=0.5, maximum-scale=0.5, user-scalable=0'); meta.setAttribute('name', 'viewport'); document.getElementsByTagName('head')[0].appendChild(meta);`
@@ -20,6 +22,7 @@ const INJECTEDJAVASCRIPT = `document.getElementsByTagName("video")[0].removeAttr
 export default function Games() {
   const [message, setMessage] = useState("");
   const [tab, setTab] = useState("Video")
+  const userItem = useSelector(store => store.users.items)
 
   const content = {
     video: {
@@ -140,7 +143,12 @@ export default function Games() {
   }, [tab])
 
   const handleClick = () => {
-    
+    // axios.post('https://diplom-navy.vercel.app/api/user/sendDescriptions', {
+    //   text: message,
+    //   userId: userItem.user.id
+    // })
+
+    console.log(message);
     setMessage("")
   };
   return (
@@ -188,7 +196,7 @@ export default function Games() {
                 <YoutubePlayer height={230} videoId={content} />
                 <View style={styles.games__bottom}>
                   <TextInput
-                    onChange={(e) => setMessage(e.nativeEvent.text)}
+                    name={'input' + index}
                     placeholder="Type here..."
                     multiline={true}
                     style={[
