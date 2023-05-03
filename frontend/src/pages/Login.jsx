@@ -44,7 +44,7 @@ export default function Login() {
           })
         );
         if (data.error) {
-          Toast.error("Ошибочный логин/пароль");
+          Toast.error("Логин және/немесе құпия сөз дұрыс емес");
         }
         setIsLoading(false)
       }

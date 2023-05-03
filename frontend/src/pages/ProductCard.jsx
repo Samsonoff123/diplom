@@ -34,7 +34,7 @@ const ProductCard = () => {
             />
           </Svg>
         </TouchableOpacity>
-        <Text style={styles.card_text}>Course Detail</Text>
+        <Text style={styles.card_text}>Курстар</Text>
       </View>
       <Image source={{ uri: image }} style={styles.image} />
       <View style={styles.content}>

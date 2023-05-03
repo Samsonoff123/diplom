@@ -1,12 +1,14 @@
-import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity, ScrollView, KeyboardAvoidingView } from 'react-native';
+import { Text, View, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import { styles } from '../../global.style'
-import { Link, useNavigate } from 'react-router-native';
+import { useNavigate } from 'react-router-native';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { fetchUser } from '../redux/slices/login';
 import { useDispatch } from 'react-redux';
 import { Path, Svg } from 'react-native-svg';
 import { Toast } from 'toastify-react-native';
+import { KeyboardAvoidingWrapper } from '../components/KeyboardAvoidingWrapper';
+
 
 export default function Registration() {
     const navigate = useNavigate()
@@ -21,13 +23,15 @@ export default function Registration() {
     const [email, setEmail] = useState(false)
     const [fourthMessage, setFourthMessage] = useState(false)
     const [password, setPassword] = useState(false)
+    const [fiveMessage, setFiveMessage] = useState(false)
+    const [level, setLevel] = useState(false)
     const [finish, setFinish] = useState(false)
 
     const dispatch = useDispatch()
 
     useEffect(() => {
         setTimeout(() => {
-            setFirstMessage('Здравствуйте, напишите свое ФИО')
+            setFirstMessage('Сәлеметсіз бе! Аты-жөніңіз жазыңыз')
         }, 1000)
 
     }, [])
@@ -37,40 +41,44 @@ export default function Registration() {
         if (i === 1) {
             setName(tempMessage)
             setTimeout(() => {
-                setSecondMessage(`Приятно познакомиться, ${tempMessage}, напишите дату своего рождения(пример: 13.04.2001)`)
+                setSecondMessage(`Танысқаныма қуаныштымын, ${tempMessage}, туған күніңізді жазыңыз(мысалы, 21.11.2000)`)
             }, 500);
         } else if (i === 2) {
             setAge(tempMessage)
             setTimeout(() => {
-                setThirdMessage('Напишите email к которому будет привязана ваша учетная запись')
+                setThirdMessage('E-mail жазыңыз')
             }, 500);
         } else if (i === 3) {
             setEmail(tempMessage.includes('@') ? tempMessage : tempMessage + '@mail.ru')
             setTimeout(() => {
-                setFourthMessage('Придумайте пароль')
+                setFourthMessage('Құпия сөз ойлап табыңыз')
             }, 500);
         } else if (i === 4) {
             setPassword(tempMessage)
             setTimeout(() => {
-                setFinish('Подождите пока мы зарегестрируем вас')
+                setFiveMessage('Ағылшын тілін қай деңгейде білесіз?')
+            }, 500);
+        } else if (i === 5) {
+            setLevel(tempMessage)
+            setTimeout(() => {
+                setFinish('Тіркелім аяқталғанша күте тұрыңыз')
             }, 500);
 
             axios.post(`https://diplom-navy.vercel.app/api/user/registration`, {
                 email,
-                password: tempMessage,
+                password,
                 name,
                 age,
+                level: tempMessage
             }).then((res) => {
-                console.log(res.data);
-
                 dispatch(fetchUser({
                     email,
                     password: tempMessage,
                 }))
             }).catch((e) => {
                 console.log(e);
-                Toast.error('Не удалось вас зарегестрировать')
-
+                Toast.error('Тіркелу сәтсіз аяқталды')
+                navigate('/')
             })
         }
         setTempMessage('')
@@ -79,7 +87,8 @@ export default function Registration() {
   }
   
   return (
-    <View style={{backgroundColor: '#fff', height: '100%'}}>
+    <KeyboardAvoidingWrapper>
+    <View style={{backgroundColor: '#fff', minHeight: '100%'}}>
     <View style={[styles.top__side, styles.shadowProp]}>
         <TouchableOpacity onPress={()=>navigate(-1)}>
             <Svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -88,7 +97,7 @@ export default function Registration() {
         </TouchableOpacity>
         <Text style={styles.top__side__text}>Тіркелу/Деңгей анықтау</Text>
     </View>
-    <View style={[styles.container, {paddingTop: 0, zIndex: 1, height: '60%'}, styles.shadowProp]}>
+    <View style={[styles.container, {paddingTop: 0, zIndex: 1, flex: 1}, styles.shadowProp]}>
         <View style={styles.reg__main}>
             <ScrollView style={styles.message}>
                 {
@@ -164,6 +173,24 @@ export default function Registration() {
                     </View> : null
                 }
                 {
+                    fiveMessage ? 
+                    <View style={styles.bot__message}>
+                        <View style={styles.message__cloud__bot}>
+                            <Text>{fiveMessage}</Text>
+                        </View>
+                        <View style={styles.gray}></View>
+                    </View> : null
+                }
+                {
+                    level ? 
+                    <View style={styles.member__message}>
+                        <View style={styles.message__cloud}>
+                            <Text style={styles.message__text}>{level}</Text>
+                        </View>
+                        <View style={styles.gray}></View>
+                    </View> : null
+                }
+                {
                     finish ? 
                     <View style={styles.bot__message}>
                         <View style={styles.message__cloud__bot}>
@@ -177,14 +204,15 @@ export default function Registration() {
             </View>
         </View>
             <View style={styles.bottom__side}>
-            <TextInput value={tempMessage} onChange={e => setTempMessage(e.nativeEvent.text)} placeholder="Type here..." style={styles.message__input} />
+                <TextInput value={tempMessage} onChange={e => setTempMessage(e.nativeEvent.text)} placeholder="Type here..." style={styles.message__input} />
                 <TouchableOpacity
-                    style={styles.button}
+                    style={[styles.button, {width: '20%', height: '100%', justifyContent: 'center', alignItems: 'center'}]}
                     onPress={handleClick}
                 >
-                    <Text style={styles.button__text}>Send</Text>
+                    <Text style={styles.button__text}>Жіберу</Text>
                 </TouchableOpacity>
             </View>
     </View>
+    </KeyboardAvoidingWrapper>
   )
 }

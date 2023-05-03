@@ -58,7 +58,7 @@ const ProductList = () => {
 
   return (
     <View style={{paddingTop: 50, backgroundColor: "#F8F8F8"}}>
-      <Text style={stylesS.h3}>Couses</Text>
+      <Text style={stylesS.h3}>Курстар</Text>
       {data.map((d, index) => (
         <ProductItem
           key={index}
@@ -87,7 +87,7 @@ const ProductItem = ({ image, title, description, price, index }) => {
           style={[stylesS.button, {width: 120, padding: 5}]}
           onPress={()=>navigate(`/products/${index}`)}
       >
-          <Text style={[stylesS.button__text, {fontSize: 16}]}>Подробнее...</Text>
+          <Text style={[stylesS.button__text, {fontSize: 16}]}>Толығырақ...</Text>
       </TouchableOpacity>
     </View>
   );

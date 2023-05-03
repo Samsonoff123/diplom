@@ -1,8 +1,9 @@
 import React from 'react'
-import { View, TouchableOpacity } from 'react-native'
+import { View, TouchableOpacity, Text } from 'react-native'
 import { Path, Svg } from 'react-native-svg'
 import { useNavigate } from 'react-router-native'
 import { styles } from '../../../global.style'
+import { Icon } from '@react-native-material/core'
 
 export default function index({isAuth}) {
     const navigate = useNavigate()
@@ -26,6 +27,10 @@ export default function index({isAuth}) {
             </Svg>
         </TouchableOpacity>
         }
+        <View style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+            <Icon name="penguin" size={50} color="black"/>
+            <Text>LearnEng</Text>
+        </View>
         {
         isAuth &&
         <TouchableOpacity onPress={()=>navigate('/profile')} style={styles.header__link}>

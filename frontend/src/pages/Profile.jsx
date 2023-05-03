@@ -71,19 +71,20 @@ export default function Profile({user}) {
                         />
                     </TouchableOpacity>
 
-                    <Text style={styles.text__profile}><Text style={styles.text__b}>ФИО: </Text>{user.user.name}</Text>
+                    <Text style={styles.text__profile}><Text style={styles.text__b}>Аты-жөні: </Text>{user.user.name}</Text>
                     <Text style={styles.text__profile}><Text style={styles.text__b}>Почта: </Text>{user.user.email}</Text>
-                    <Text style={styles.text__profile}><Text style={styles.text__b}>Дата рождения: </Text>{user.user.age}</Text>
-                    <Text style={styles.text__profile}><Text style={styles.text__b}>Возраст: </Text>{age}</Text>
-                    <Text style={styles.text__profile}><Text style={styles.text__b}>Роль: </Text>{user.user.role}</Text>
+                    <Text style={styles.text__profile}><Text style={styles.text__b}>Туған күн: </Text>{user.user.age}</Text>
+                    <Text style={styles.text__profile}><Text style={styles.text__b}>Жасы: </Text>{age}</Text>
+                    <Text style={styles.text__profile}><Text style={styles.text__b}>Деңгей: </Text>{user.user.level}</Text>
+                    <Text style={styles.text__profile}><Text style={styles.text__b}>Рөл: </Text>{user.user.role}</Text>
                     <TouchableOpacity
                         style={{...styles.button, alignSelf: 'center'}}
                         onPress={handleExit}
                     >
-                        <Text style={styles.button__text}>Выйти</Text>
+                        <Text style={styles.button__text}>Шығу</Text>
                     </TouchableOpacity>
                 </View>
-            : <Text>Нет данных</Text>
+            : <Text>Мәлімет жоқ</Text>
         }
 
     </View>

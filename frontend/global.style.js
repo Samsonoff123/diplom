@@ -161,18 +161,20 @@ export const styles = StyleSheet.create({
     color: '#000000',
   },
   bottom__side: {
+    display: 'flex',
+    flexDirection: 'row',
     backgroundColor: '#F8F8F8',
     borderRadius: 20,
     width: '100%',
-    height: 200,
+    height: 130,
     padding: 20,
   },
   message__input: {
     padding: 30,
     paddingLeft: 10,
     paddingRight: 10,
-    width: '100%',
-    height: '65%',
+    width: '80%',
+    height: '100%',
     fontSize: 16,
   },
   message: {
@@ -230,7 +232,10 @@ export const styles = StyleSheet.create({
     overflow: 'hidden',
     transform: [{
       scale: 1.2
-    }]
+    }],
+    marginBottom: 30,
+    borderBottomColor: '#fff',
+    borderBottomWidth: 1
   },
   slide__image: {
     width: '100%',
@@ -282,18 +287,6 @@ export const styles = StyleSheet.create({
     width: 90,
     backgroundColor: '#949494',
   },
-  svg__left: {
-    zIndex: 2,
-    transform: [{
-      translateX: 40
-    }]
-  },
-  svg__right: {
-    zIndex: 2,
-    transform: [{
-      translateX: -40
-    }]
-  },
   products: {
     padding: 20,
     width: '100%',
@@ -343,19 +336,24 @@ export const styles = StyleSheet.create({
     borderRadius: 15
   },
   games__text: {
-    display: 'block',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
     borderRadius: 20,
     borderColor: 'transparent',
     borderWidth: 3,
-    paddingLeft: 5,
-    paddingRight: 5,
-    fontWeight: '400',
-    fontSize: 25,
-    lineHeight: 38,
+    paddingLeft: 20,
+    paddingRight: 20,
     marginTop: 20,
     marginBottom: 20,
     color: '#000000',
     textAlign: 'center'
+  },
+  games__text__text: {
+    fontWeight: '400',
+    fontSize: 20,
+    lineHeight: 38,
   },
   games__text__active: {
     borderColor: 'white',
@@ -402,13 +400,12 @@ export const styles = StyleSheet.create({
     backgroundColor: 'rgba(119, 31, 152, 0.3)',
     width: '100%',
     height: 200,
-    transform: [{translateY: -15}],
-    marginBottom: -15
   },
   tests: {
     padding: 20,
     paddingTop: 40,
-    backgroundColor: 'rgba(119, 31, 152, 0.3)',
+    backgroundColor: 'rgba(119, 31, 152, 0.1)',
+    height: '100%'
   },
   progress: {
     height: 10,
@@ -476,7 +473,7 @@ export const styles = StyleSheet.create({
     zIndex: -1
   },
   result__text: {
-    color: '#fff',
+    color: '#000',
     fontSize: 20
   },
   question__button: {

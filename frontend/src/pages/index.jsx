@@ -24,7 +24,7 @@ export default function Index() {
     if (userItem) {
         setIsAuth(true)
         setToken(userItem.token)
-        Toast.success('Вы успешно вошли')
+        Toast.success('Сіз жүйеге кірдіңіз')
     }
   }, [userItem])
  

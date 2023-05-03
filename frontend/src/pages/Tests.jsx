@@ -10,6 +10,7 @@ import {
 import { styles } from "../../global.style";
 
 import { useState } from "react";
+import { Icon } from "@react-native-material/core";
 
 const questions1 = [
   {
@@ -395,12 +396,12 @@ function TestsElement({ questions }) {
                 : require("../assets/sheldon4.png")
             }
           />
-          <View style={styles.buttons}>
-            <TouchableOpacity style={[styles.button]} onPress={handleClick}>
-              <Text style={styles.button__text}>Кайтадан</Text>
+          <View style={[styles.buttons, {justifyContent: 'space-between'}]}>
+            <TouchableOpacity style={[styles.button, {width: '49%'}]} onPress={handleClick}>
+              <Text style={[styles.button__text, {fontSize: 16}]}>Кайтадан</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.button]} onPress={handleClick}>
-              <Text style={styles.button__text}>Нәтиженi жіберу</Text>
+            <TouchableOpacity style={[styles.button, {width: '49%'}]} onPress={handleClick}>
+              <Text style={[styles.button__text, {fontSize: 16}]}>Нәтиженi жіберу</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -413,36 +414,45 @@ export default function Tests() {
   const [tab, setTab] = useState("test1");
   return (
     <View>
-      <View style={[styles.games__header, {paddingTop: 90}]}>
-        <TouchableOpacity onPress={() => setTab("test1")}>
-          <Text
-            style={[
-              styles.games__text,
-              tab === "test1" && styles.games__text__active,
-            ]}
-          >
-            Жеңіл
-          </Text>
+      <View style={[styles.games__header]}>
+        <TouchableOpacity
+          style={[
+            styles.games__text,
+            tab === "test1" && styles.games__text__active,
+          ]}
+          onPress={() => setTab("test1")}
+        >
+          <View style={{ display: "flex", flexDirection: "row" }}>
+            <Icon name="star-face" size={18} color="#fff" />
+          </View>
+          <Text style={styles.games__text__text}>Жеңіл</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => setTab("test2")}>
-          <Text
-            style={[
-              styles.games__text,
-              tab === "test2" && styles.games__text__active,
-            ]}
-          >
-            Орташа
-          </Text>
+        <TouchableOpacity
+          style={[
+            styles.games__text,
+            tab === "test2" && styles.games__text__active,
+          ]}
+          onPress={() => setTab("test2")}
+        >
+          <View style={{ display: "flex", flexDirection: "row" }}>
+            <Icon name="star-face" size={18} color="#fff" />
+            <Icon name="star-face" size={18} color="#fff" />
+          </View>
+          <Text style={styles.games__text__text}>Орташа</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => setTab("test3")}>
-          <Text
-            style={[
-              styles.games__text,
-              tab === "test3" && styles.games__text__active,
-            ]}
-          >
-            Қиын
-          </Text>
+        <TouchableOpacity
+          style={[
+            styles.games__text,
+            tab === "test3" && styles.games__text__active,
+          ]}
+          onPress={() => setTab("test3")}
+        >
+          <View style={{ display: "flex", flexDirection: "row" }}>
+            <Icon name="star-face" size={18} color="#fff" />
+            <Icon name="star-face" size={18} color="#fff" />
+            <Icon name="star-face" size={18} color="#fff" />
+          </View>
+          <Text style={styles.games__text__text}>Қиын</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.tests}>

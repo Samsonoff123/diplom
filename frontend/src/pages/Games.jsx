@@ -15,13 +15,14 @@ import WebView from "react-native-webview";
 import Carousel from 'react-native-snap-carousel';
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { Icon } from "@react-native-material/core";
 
 
 const INJECTEDJAVASCRIPT = `document.getElementsByTagName("video")[0].removeAttribute("autoplay"); const meta = document.createElement('meta'); meta.setAttribute('content', 'width=device-width, initial-scale=0.5, maximum-scale=0.5, user-scalable=0'); meta.setAttribute('name', 'viewport'); document.getElementsByTagName('head')[0].appendChild(meta);`
 
 export default function Games() {
   const [message, setMessage] = useState("");
-  const [tab, setTab] = useState("Video")
+  const [tab, setTab] = useState("Cards")
   const userItem = useSelector(store => store.users.items)
 
   const content = {
@@ -154,49 +155,53 @@ export default function Games() {
   return (
     <View style={styles.games__page}>
       <View style={styles.games__header}>
-        <TouchableOpacity onPress={() => setTab("Video")}>
-          <Text
-            style={[
-              styles.games__text,
-              tab === "Video" && styles.games__text__active,
-            ]}
-          >
-            Видео
-          </Text>
+        <TouchableOpacity
+          style={[
+            styles.games__text,
+            tab === "Cards" && styles.games__text__active,
+          ]}
+          onPress={() => setTab("Cards")}
+        >
+          <Icon name="cards" size={50} color="#fff" />
+          <Text style={styles.games__text__text}>Карталар</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => setTab("Audio")}>
-          <Text
-            style={[
-              styles.games__text,
-              tab === "Audio" && styles.games__text__active,
-            ]}
-          >
-            Аудио
-          </Text>
+        <TouchableOpacity
+          style={[
+            styles.games__text,
+            tab === "Video" && styles.games__text__active,
+          ]}
+          onPress={() => setTab("Video")}
+        >
+          <Icon name="video" size={50} color="#fff" />
+          <Text style={styles.games__text__text}>Видео</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => setTab("Cards")}>
-          <Text
-            style={[
-              styles.games__text,
-              tab === "Cards" && styles.games__text__active,
-            ]}
-          >
-            Карты
-          </Text>
+        <TouchableOpacity
+          style={[
+            styles.games__text,
+            tab === "Audio" && styles.games__text__active,
+          ]}
+          onPress={() => setTab("Audio")}
+        >
+          <Icon name="volume-high" size={50} color="#fff" />
+          <Text style={styles.games__text__text}>Аудио</Text>
         </TouchableOpacity>
       </View>
       {tab === "Video" && (
         <View style={styles.games__body}>
-          <Text style={styles.h3}>Видео косымшалар</Text>
+          <Text style={styles.h3}>Бейне қосымшалар</Text>
           <View style={styles.games__body__content_list}>
             {content.video.content.map((content, index) => (
               <View key={index} style={styles.games__body__content_element}>
-                <Text style={styles.text__bold}>№{index + 1} Видео</Text>
-                <Text style={styles.text}>Видеоны кышкаша мазмунда</Text>
+                <Text style={styles.text__bold}>
+                  №{index + 1} Бейнероликтер
+                </Text>
+                <Text style={styles.text}>
+                  Бейнероликке қысқаша сипаттама беріңіз
+                </Text>
                 <YoutubePlayer height={230} videoId={content} />
                 <View style={styles.games__bottom}>
                   <TextInput
-                    name={'input' + index}
+                    name={"input" + index}
                     placeholder="Type here..."
                     multiline={true}
                     style={[
@@ -217,7 +222,7 @@ export default function Games() {
                     ]}
                     onPress={handleClick}
                   >
-                    <Text style={styles.button__text}>Send</Text>
+                    <Text style={styles.button__text}>Жіберу</Text>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -232,46 +237,17 @@ export default function Games() {
             {content.audio.content.map((content, index) => (
               <View key={index} style={styles.games__body__content_element}>
                 <Text style={styles.text__bold}>№{index + 1} Аудио</Text>
-                <Text style={[styles.text, { marginBottom: 10 }]}>
-                  Аудиодан не түсіндің
-                </Text>
                 <WebView
-                  source={{url: content}}
+                  source={{ url: content }}
                   scrollEnabled={false}
                   bounces={false}
-                  style={{ height: 60, borderRadius: 25}}
+                  style={{ height: 60, borderRadius: 25 }}
                   javaScriptEnabled={true}
                   mediaPlaybackRequiresUserAction={true}
                   allowsInlineMediaPlayback={true}
                   injectedJavaScript={INJECTEDJAVASCRIPT}
                 />
-                <Text>
-                </Text>
-                <View style={styles.games__bottom}>
-                  <TextInput
-                    onChange={(e) => setMessage(e.nativeEvent.text)}
-                    placeholder="Type here..."
-                    multiline={true}
-                    style={[
-                      styles.games__message__input,
-                      { borderBottomRightRadius: 0 },
-                    ]}
-                  />
-                  <TouchableOpacity
-                    style={[
-                      styles.button,
-                      {
-                        marginLeft: "auto",
-                        width: 100,
-                        borderRadius: 0,
-                        borderBottomLeftRadius: 30,
-                        borderBottomRightRadius: 10,
-                      },
-                    ]}
-                  >
-                    <Text style={styles.button__text}>Send</Text>
-                  </TouchableOpacity>
-                </View>
+                <Text></Text>
               </View>
             ))}
           </View>
@@ -279,36 +255,41 @@ export default function Games() {
       )}
       {tab === "Cards" && (
         <View style={styles.games__body}>
-            <Text style={styles.h3}>Cards</Text>
-              <View style={styles.games__body__content_list}>
-                {
-                  content.cards.content.map((data, index) => 
-                    <Carousel
-                    key={index}
-                      data={data.data}
-                      loop
-                      hasParallaxImages
-                      layout={'stack'}
-                      sliderWidth={360}
-                      itemWidth={300}
-                      renderItem={
-                        ({item, index}) => 
-                          <View style={[styles.carousel, {backgroundColor: item.color}]}>
-                            <Text style={item.isAnswer ? styles.carousel__text_answer : styles.carousel__text}>{item.text}</Text>
-                            {
-                              item.isAnswer && <Image
-                              style={styles.carousel__image}
-                              source={item.image} 
-                            />
-                            }
-
-                          </View>
+          <Text style={styles.h3}>Сөздік карталар</Text>
+          <View style={styles.games__body__content_list}>
+            {content.cards.content.map((data, index) => (
+              <Carousel
+                key={index}
+                data={data.data}
+                loop
+                hasParallaxImages
+                layout={"stack"}
+                sliderWidth={360}
+                itemWidth={300}
+                renderItem={({ item, index }) => (
+                  <View
+                    style={[styles.carousel, { backgroundColor: item.color }]}
+                  >
+                    <Text
+                      style={
+                        item.isAnswer
+                          ? styles.carousel__text_answer
+                          : styles.carousel__text
                       }
-                    />  
-                  )
-                  
-                }
-              </View>
+                    >
+                      {item.text}
+                    </Text>
+                    {item.isAnswer && (
+                      <Image
+                        style={styles.carousel__image}
+                        source={item.image}
+                      />
+                    )}
+                  </View>
+                )}
+              />
+            ))}
+          </View>
         </View>
       )}
     </View>
