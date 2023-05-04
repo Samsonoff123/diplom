@@ -1,5 +1,4 @@
 import { StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
-import { Path, Svg, Circle } from 'react-native-svg';
 import Swiper from 'react-native-swiper';
 import { Link, useNavigate } from 'react-router-native';
 import { styles } from '../../global.style';

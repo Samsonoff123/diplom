@@ -64,6 +64,8 @@ export default function Registration() {
                 setFinish('Тіркелім аяқталғанша күте тұрыңыз')
             }, 500);
 
+            
+
             axios.post(`https://diplom-navy.vercel.app/api/user/registration`, {
                 email,
                 password,
@@ -73,7 +75,7 @@ export default function Registration() {
             }).then((res) => {
                 dispatch(fetchUser({
                     email,
-                    password: tempMessage,
+                    password,
                 }))
             }).catch((e) => {
                 console.log(e);
@@ -206,7 +208,7 @@ export default function Registration() {
             <View style={styles.bottom__side}>
                 <TextInput value={tempMessage} onChange={e => setTempMessage(e.nativeEvent.text)} placeholder="Type here..." style={styles.message__input} />
                 <TouchableOpacity
-                    style={[styles.button, {width: '20%', height: '100%', justifyContent: 'center', alignItems: 'center'}]}
+                    style={[styles.button, {width: '25%', height: '100%', justifyContent: 'center', alignItems: 'center'}]}
                     onPress={handleClick}
                 >
                     <Text style={styles.button__text}>Жіберу</Text>
