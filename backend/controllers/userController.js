@@ -88,7 +88,7 @@ class UserController {
                 where: { email }
             }
         )
-        return res.json(user)
+        return res.json(progress)
     }
 
     async updateImage(req, res) {
