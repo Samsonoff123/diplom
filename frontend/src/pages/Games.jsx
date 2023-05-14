@@ -188,7 +188,6 @@ export default function Games() {
       </View>
       {tab === "Video" && (
         <View style={styles.games__body}>
-          <Text style={styles.h3}>Бейне қосымшалар</Text>
           <View style={styles.games__body__content_list}>
             {content.video.content.map((content, index) => (
               <View key={index} style={styles.games__body__content_element}>
@@ -232,7 +231,6 @@ export default function Games() {
       )}
       {tab === "Audio" && (
         <View style={styles.games__body}>
-          <Text style={styles.h3}>Аудио косымшалар</Text>
           <View style={styles.games__body__content_list}>
             {content.audio.content.map((content, index) => (
               <View key={index} style={styles.games__body__content_element}>
@@ -255,7 +253,6 @@ export default function Games() {
       )}
       {tab === "Cards" && (
         <View style={styles.games__body}>
-          <Text style={styles.h3}>Сөздік карталар</Text>
           <View style={styles.games__body__content_list}>
             {content.cards.content.map((data, index) => (
               <Carousel

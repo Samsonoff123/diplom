@@ -11,5 +11,6 @@ router.get('/auth', authMiddleware, userController.check)
 router.get('/profile/:email', userController.getProfile)
 router.get('/getAll', userController.getAllDescriptions)
 router.put('/profile', userController.updateImage)
+router.put('/profile/progress', userController.updateProgress)
 
 module.exports = router

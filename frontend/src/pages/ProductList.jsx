@@ -58,7 +58,6 @@ const ProductList = () => {
 
   return (
     <View style={{paddingTop: 50, backgroundColor: "#F8F8F8"}}>
-      <Text style={stylesS.h3}>Курстар</Text>
       {data.map((d, index) => (
         <ProductItem
           key={index}

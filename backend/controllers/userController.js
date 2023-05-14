@@ -78,6 +78,19 @@ class UserController {
         return res.json(descriptions)
     }
 
+    async updateProgress(req, res) {
+        const { progress, email } = req.body
+        const user = await User.update(
+            {
+                progress
+            },
+            {
+                where: { email }
+            }
+        )
+        return res.json(user)
+    }
+
     async updateImage(req, res) {
         const {img, email} = req.body
 

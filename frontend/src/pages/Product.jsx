@@ -29,12 +29,6 @@ export default function Product({isAuth}) {
                                     source={require(`../assets/slide2.jpg`)} 
                                 />
                             </View>
-                            <View>
-                                <Image
-                                    style={styles.slide__image}
-                                    source={require(`../assets/slide3.jpg`)} 
-                                />
-                            </View>
                         </Swiper>
                     </View>
                 </View>

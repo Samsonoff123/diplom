@@ -10,6 +10,7 @@ const User = sequelize.define('user', {
     age: {type: DataTypes.STRING},
     img: {type: DataTypes.STRING, defaultValue: ""},
     level: {type: DataTypes.STRING},
+    progress: {type: DataTypes.STRING, defaultValue: ""},
     role: {type: DataTypes.STRING, defaultValue: "USER"},
 })
 
