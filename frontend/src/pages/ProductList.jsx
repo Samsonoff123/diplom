@@ -1,7 +1,9 @@
 import React from "react";
-import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, Image, TouchableOpacity, StyleSheet, Linking } from "react-native";
 import { styles as stylesS} from "../../global.style";
 import { useNavigate } from "react-router-native";
+import { useState } from "react";
+import { Icon } from "@react-native-material/core";
 
 export const data = [
   {
@@ -54,21 +56,181 @@ export const data = [
   },
 ]
 
+const channels = [
+  {
+    img: require('../assets/channel1.png'),
+    link: 'https://www.youtube.com/@CakeEnglish/featured',
+    name: 'Cake English'
+  },
+  {
+    img: require('../assets/channel2.png'),
+    link: 'https://www.youtube.com/@LinguaTripTV',
+    name: 'LinguaTrip TV'
+  },
+  {
+    img: require('../assets/channel3.png'),
+    link: 'https://www.youtube.com/@skyengschool',
+    name: 'Skyeng: онлайн-школа английского языка '
+  },
+  {
+    img: require('../assets/channel4.png'),
+    link: 'https://www.youtube.com/@linguamarina',
+    name: 'linguamarina'
+  },
+  {
+    img: require('../assets/channel5.png'),
+    link: 'https://www.youtube.com/@TED',
+    name: 'TED'
+  },
+  {
+    img: require('../assets/channel6.png'),
+    link: 'https://www.youtube.com/@KirillsEnglish',
+    name: 'KIRILL`S ENGLISH'
+  },
+  {
+    img: require('../assets/channel7.png'),
+    link: 'https://www.youtube.com/@EnglishwithLucy',
+    name: 'English with Lucy'
+  },
+]
+
+const apps = [
+  {
+    name: 'Cake - Learn English & Korean',
+    img: require('../assets/app1.png'),
+    appstore: 'https://apps.apple.com/kz/app/cake-learn-english-korean/id1350420987',
+    googleplay: 'https://play.google.com/store/apps/details?id=me.mycake&hl=en_US',
+  },
+  {
+    name: 'Tandem: Language exchange',
+    img: require('../assets/app2.png'),
+    appstore: 'https://apps.apple.com/kz/app/tandem-conversation-exchange/id959001619',
+    googleplay: 'https://play.google.com/store/apps/details?id=net.tandem&hl=en_US',
+  },
+  {
+    name: 'English with Lingualeo',
+    img: require('../assets/app3.png'),
+    appstore: 'https://apps.apple.com/kz/app/learn-english-with-lingualeo/id480952151',
+    googleplay: 'https://play.google.com/store/apps/details?id=com.lingualeo.android&hl=en_US',
+  },
+  {
+    name: 'Quizlet: Languages & Vocab',
+    img: require('../assets/app4.png'),
+    appstore: 'https://apps.apple.com/kz/app/quizlet-flashcards-homework/id546473125',
+    googleplay: 'https://play.google.com/store/apps/details?id=com.quizlet.quizletandroid&hl=en_US',
+  },
+]
+
 const ProductList = () => {
+  const [tab, setTab] = useState("Books")
 
   return (
-    <View style={{paddingTop: 50, backgroundColor: "#F8F8F8"}}>
-      {data.map((d, index) => (
-        <ProductItem
-          key={index}
-          image={d.image}
-          title={d.title}
-          description={d.description}
-          price={d.price}
-          index={index}
-        />
-      ))}
-    </View>
+    <>
+      <View style={stylesS.games__header}>
+        <TouchableOpacity
+          style={[
+            stylesS.games__text,
+            tab === "Books" && stylesS.games__text__active,
+            {paddingRight: 10, paddingLeft: 10}
+          ]}
+          onPress={() => setTab("Books")}
+        >
+          <Icon name="book-open" size={50} color="#fff" />
+          <Text style={stylesS.games__text__text}>Books</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            stylesS.games__text,
+            tab === "Channels" && stylesS.games__text__active,
+            {paddingRight: 10, paddingLeft: 10}
+          ]}
+          onPress={() => setTab("Channels")}
+        >
+          <Icon name="youtube" size={50} color="#fff" />
+          <Text style={stylesS.games__text__text}>Channels</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            stylesS.games__text,
+            tab === "Apps" && stylesS.games__text__active,
+            {paddingRight: 10, paddingLeft: 10}
+          ]}
+          onPress={() => setTab("Apps")}
+        >
+          <Icon name="apps" size={50} color="#fff" />
+          <Text style={stylesS.games__text__text}>Apps</Text>
+        </TouchableOpacity>
+      </View>
+
+     {
+      tab === "Books" && (
+      <View style={{paddingTop: 10, backgroundColor: "#F8F8F8"}}>
+        {data.map((d, index) => (
+          <ProductItem
+            key={index}
+            image={d.image}
+            title={d.title}
+            description={d.description}
+            price={d.price}
+            index={index}
+          />
+        ))}
+      </View>
+      )
+     }
+     {
+      tab === "Channels" && (
+        <View>
+          {
+            channels.map(channel => 
+              <View style={{width: '100%', padding: 20}}>
+                <Text style={{fontSize: 16, fontWeight: '600'}}>{channel.name}</Text>
+                <Image style={{width: '100%', height: 100, marginTop: 10, resizeMode: 'contain'}} source={channel.img}/>
+                <TouchableOpacity
+                    style={[stylesS.button, {width: 120, padding: 5, marginTop: 10, alignSelf: 'flex-end'}]}
+                    onPress={()=>Linking.openURL(channel.link)}
+                >
+                    <Text style={[stylesS.button__text, {fontSize: 16}]}>Толығырақ...</Text>
+                </TouchableOpacity>
+              </View>
+            )
+          }
+        </View>
+      )
+     }
+     {
+      tab === 'Apps' && (
+        <View>
+            {
+              apps.map(app => 
+                <View style={{width: '100%', padding: 20}}>
+                  <Text style={{fontSize: 16, fontWeight: '600'}}>{app.name}</Text>
+                  <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+                    <Image style={{width: 150, height: 150, marginTop: 10, resizeMode: 'contain'}} source={app.img}/>
+                    <View>
+                      <TouchableOpacity
+                        style={[stylesS.button, {width: 120, padding: 5, marginTop: 10, alignSelf: 'flex-end', alignItems: 'center'}]}
+                        onPress={()=>Linking.openURL(app.appstore)}
+                      >
+                        <Icon name="apple-ios" size={50} color="#fff" />
+                          <Text style={[stylesS.button__text, {fontSize: 16}]}>Толығырақ...</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        style={[stylesS.button, {width: 120, padding: 5, marginTop: 10, alignSelf: 'flex-end', alignItems: 'center'}]}
+                        onPress={()=>Linking.openURL(app.googleplay)}
+                      >
+                        <Icon name="android" size={50} color="#fff" />
+                          <Text style={[stylesS.button__text, {fontSize: 16}]}>Толығырақ...</Text>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                </View>  
+              )
+            }
+        </View>
+      )
+     }
+    </>
   )
 };
 
@@ -80,7 +242,6 @@ const ProductItem = ({ image, title, description, price, index }) => {
       <View style={styles.textContainer}>
         <Text style={styles.title}>{title}</Text>
         <Text numberOfLines={4} ellipsizeMode='tail' style={styles.description}>{description}</Text>
-        <Text style={styles.price}>{price}$</Text>
       </View>
       <TouchableOpacity
           style={[stylesS.button, {width: 120, padding: 5}]}

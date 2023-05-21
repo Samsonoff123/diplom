@@ -41,7 +41,9 @@ export default function Registration() {
     }, [])
 
     useEffect(() => {
+      if (firstMessage) {
         setTempMessage(chosenDate.getDate() + '.' + (chosenDate.getMonth() + 1) + '.' + chosenDate.getFullYear())
+      }
     }, [chosenDate])
 
   const handleClick = () => {

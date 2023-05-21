@@ -361,6 +361,9 @@ export const styles = StyleSheet.create({
     borderColor: "white",
     borderWidth: 3,
   },
+  games__text__disabled: {
+    opacity: 0.5
+  },
   carousel: {
     borderRadius: 25,
     height: 200,
@@ -514,5 +517,21 @@ export const styles = StyleSheet.create({
   reg_tabs_item_active: {
     borderColor: 'black',
     borderWidth: 3
-  }
+  },
+  video__answer: {
+    display: 'flex',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    height: 250, 
+    borderRadius: 25,
+    backgroundColor: 'rgba(119, 31, 152, 0.1)',
+    padding: 10
+  },
+  video__answer_text: {
+    fontSize: 18,
+    fontWeight: 'bold'
+  },
+  video__answer_text_count: {
+    fontSize: 16,
+  },
 });

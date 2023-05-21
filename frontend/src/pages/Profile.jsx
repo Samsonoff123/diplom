@@ -76,6 +76,7 @@ export default function Profile({user}) {
                     <Text style={styles.text__profile}><Text style={styles.text__b}>Туған күні: </Text>{user.user.age}</Text>
                     <Text style={styles.text__profile}><Text style={styles.text__b}>Жасы: </Text>{age}</Text>
                     <Text style={styles.text__profile}><Text style={styles.text__b}>Деңгейі: </Text>{user.user.level}</Text>
+                    <Text style={styles.text__profile}><Text style={styles.text__b}>Прогресс: </Text>{user.user.progress ?? 'A1'}</Text>
                     <Text style={styles.text__profile}><Text style={styles.text__b}>Рөлі: </Text>{user.user.role}</Text>
                     <TouchableOpacity
                         style={{...styles.button, alignSelf: 'center'}}

@@ -11,6 +11,11 @@ import { styles } from "../../global.style";
 
 import { useState } from "react";
 import { Icon } from "@react-native-material/core";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import axios from "axios";
+import { updateProgress } from "../redux/slices/login";
+import { Toast } from "toastify-react-native";
 
 const questions1 = [
   {
@@ -334,11 +339,13 @@ const questions3 = [
   },
 ];
 
-function TestsElement({ questions }) {
+function TestsElement({ questions, tab }) {
   const [step, setStep] = useState(0);
   const [correct, setCorrect] = useState(0);
   const question = questions[step];
   const percentage = Math.round((step / questions.length) * 100);
+  const dispatch = useDispatch()
+  const {email} = useSelector(store => store.users.items.user)
 
   const onClickVariant = (index) => {
     setStep(step + 1);
@@ -346,12 +353,37 @@ function TestsElement({ questions }) {
     if (index === question.correct) {
       setCorrect(correct + 1);
     }
+
+    
   };
 
   const handleClick = () => {
     setStep(0);
     setCorrect(0);
   };
+
+  const handleSubmit = async() => {
+    if (step === questions.length) {
+      let progress = 'A1'
+
+      if (tab === 'test1') {
+        progress = correct < 15 ? 'A1' : 'A2'
+      } else if (tab === 'test2') {
+        progress = correct < 15 ? 'B1' : 'B2'
+      } else if (tab === 'test3') {
+        progress = correct < 15 ? 'C1' : 'C2'
+      }
+
+      const { data } = await axios.put(`https://diplom-navy.vercel.app/api/user/profile/progress`, {
+        email,
+        progress
+      })
+
+      dispatch(updateProgress(data))
+
+      Toast.success('Сіздің прогрессіңіз өзгерілді!')
+    }
+  }
 
   return (
     <View style={styles.test_element_main}>
@@ -400,7 +432,7 @@ function TestsElement({ questions }) {
             <TouchableOpacity style={[styles.button, {width: '49%'}]} onPress={handleClick}>
               <Text style={[styles.button__text, {fontSize: 16}]}>Кайтадан</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.button, {width: '49%'}]} onPress={handleClick}>
+            <TouchableOpacity style={[styles.button, {width: '49%'}]} onPress={handleSubmit}>
               <Text style={[styles.button__text, {fontSize: 16}]}>Нәтиженi жіберу</Text>
             </TouchableOpacity>
           </View>
@@ -411,7 +443,17 @@ function TestsElement({ questions }) {
 }
 
 export default function Tests() {
+  const store = useSelector(store => store)
   const [tab, setTab] = useState("test1");
+  const [progress, setProgress] = useState("");
+
+  const LVL2 = (!progress || progress === 'A2' || progress === 'B1' || progress === 'B2' || progress === 'C1' || progress === 'C2')
+  const LVL3 = (!progress || progress === 'B2' || progress === 'C1' || progress === 'C2')
+
+  useEffect(() => {
+    setProgress(store.users.items.user.progress);
+  }, [store])
+
   return (
     <View>
       <View style={[styles.games__header]}>
@@ -428,9 +470,11 @@ export default function Tests() {
           <Text style={styles.games__text__text}>Жеңіл</Text>
         </TouchableOpacity>
         <TouchableOpacity
+          disabled={!LVL2}
           style={[
             styles.games__text,
             tab === "test2" && styles.games__text__active,
+            (!LVL2) && styles.games__text__disabled,
           ]}
           onPress={() => setTab("test2")}
         >
@@ -441,9 +485,11 @@ export default function Tests() {
           <Text style={styles.games__text__text}>Орташа</Text>
         </TouchableOpacity>
         <TouchableOpacity
+          disabled={!LVL3}
           style={[
             styles.games__text,
             tab === "test3" && styles.games__text__active,
+            !LVL3 && styles.games__text__disabled,
           ]}
           onPress={() => setTab("test3")}
         >
@@ -456,9 +502,9 @@ export default function Tests() {
         </TouchableOpacity>
       </View>
       <View style={styles.tests}>
-        {tab === "test1" && <TestsElement questions={questions1} />}
-        {tab === "test2" && <TestsElement questions={questions2} />}
-        {tab === "test3" && <TestsElement questions={questions3} />}
+        {tab === "test1" && <TestsElement questions={questions1} tab={tab} />}
+        {tab === "test2" && <TestsElement questions={questions2} tab={tab} />}
+        {tab === "test3" && <TestsElement questions={questions3} tab={tab} />}
       </View>
     </View>
   );

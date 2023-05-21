@@ -21,11 +21,9 @@ export default function Index() {
   
   useEffect(()=>{
     setIsAuth(false)
-    console.log(isAuth);
     if (userItem) {
         setIsAuth(true)
         setToken(userItem.token)
-        Toast.success('Сіз жүйеге кірдіңіз')
     }
   }, [userItem])
  

@@ -16,9 +16,12 @@ import Carousel from 'react-native-snap-carousel';
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { Icon } from "@react-native-material/core";
+import VideoItem from "../components/VideoItem";
+import { audioContent } from "../components/audoItems";
 
 
 const INJECTEDJAVASCRIPT = `document.getElementsByTagName("video")[0].removeAttribute("autoplay"); const meta = document.createElement('meta'); meta.setAttribute('content', 'width=device-width, initial-scale=0.5, maximum-scale=0.5, user-scalable=0'); meta.setAttribute('name', 'viewport'); document.getElementsByTagName('head')[0].appendChild(meta);`
+
 
 export default function Games() {
   const [message, setMessage] = useState("");
@@ -28,7 +31,32 @@ export default function Games() {
   const content = {
     video: {
       name: "video",
-      content: ["uYoEv_lI6Xw", "qRQoJv4hpEE", "c9xMC7lx7sY", "GU176OCPQWk", "8-s0MAU5HHU", "X1N_A2vO7Js"],
+      content: [
+        {
+          video: "https://www.youtube.com/embed/n5EpfSwI1GQ?clip=UgkxunE2GyTYuNAv9vTB-DBNn8FVxC9XQvQr&amp;clipt=EMXYARifhwI",
+          answer: "You remember the Ludwins. The big one had a thing for you, didn't she?"
+        },
+        {
+          video: "https://www.youtube.com/embed/n5EpfSwI1GQ?clip=Ugkxhnye5G2iC3ks7OxoIKO0-38emfxO8nZc&amp;clipt=ENDvAxjkmwQ",
+          answer: "Yeah, I always had a thing for musicians"
+        },
+        {
+          video: "https://www.youtube.com/embed/n5EpfSwI1GQ?clip=UgkxLCxPdAMRAEbrWJHC-48SHnca_ULXzxQ4&amp;clipt=EKnFBxjV-wc",
+          answer: "Well, good, because I've always had a thing for pretty girls"
+        },
+        {
+          video: "https://www.youtube.com/embed/n5EpfSwI1GQ?clip=UgkxLsFkZQA11E3ZK87KzEK_d2iIWdELjXw4&amp;clipt=EP3CDhiC-w4",
+          answer: "Moments where that task is so unbelievably challenging that you feel retarted, disabled is some way"
+        },
+        {
+          video: "https://www.youtube.com/embed/n5EpfSwI1GQ?clip=UgkxSg0arWkBkber6SW07engEKYFHmugy4pN&amp;clipt=EKuqFRiM0xU",
+          answer: "You're really, really smart but also selfish, crass"
+        },
+        {
+          video: "https://www.youtube.com/embed/tdVMmsWijWU?clip=UgkxDHLoXWVC3gyLOgSo-SXUy-fjE_RSk0eT&amp;clipt=EP_9BRjZrAY",
+          answer: "Dear Paul, I've finally devided to take the plunge and go for that job in Tokyo"
+        }
+      ],
     },
     audio: {
       name: "audio",
@@ -143,15 +171,7 @@ export default function Games() {
     }
   }, [tab])
 
-  const handleClick = () => {
-    // axios.post('https://diplom-navy.vercel.app/api/user/sendDescriptions', {
-    //   text: message,
-    //   userId: userItem.user.id
-    // })
 
-    console.log(message);
-    setMessage("")
-  };
   return (
     <View style={styles.games__page}>
       <View style={styles.games__header}>
@@ -189,63 +209,37 @@ export default function Games() {
       {tab === "Video" && (
         <View style={styles.games__body}>
           <View style={styles.games__body__content_list}>
+            <Text style={[styles.text, {marginBottom: 20, fontWeight: 'bold'}]}>
+              Бейнероликтерге субтитр жасаңыз
+            </Text>
             {content.video.content.map((content, index) => (
-              <View key={index} style={styles.games__body__content_element}>
-                <Text style={styles.text__bold}>
-                  №{index + 1} Бейнероликтер
-                </Text>
-                <Text style={styles.text}>
-                  Бейнероликке қысқаша сипаттама беріңіз
-                </Text>
-                <YoutubePlayer height={230} videoId={content} />
-                <View style={styles.games__bottom}>
-                  <TextInput
-                    name={"input" + index}
-                    placeholder="Type here..."
-                    multiline={true}
-                    style={[
-                      styles.games__message__input,
-                      { borderBottomRightRadius: 0 },
-                    ]}
-                  />
-                  <TouchableOpacity
-                    style={[
-                      styles.button,
-                      {
-                        marginLeft: "auto",
-                        width: 100,
-                        borderRadius: 0,
-                        borderBottomLeftRadius: 30,
-                        borderBottomRightRadius: 10,
-                      },
-                    ]}
-                    onPress={handleClick}
-                  >
-                    <Text style={styles.button__text}>Жіберу</Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
+              <VideoItem content={content} key={index} />
             ))}
           </View>
         </View>
       )}
       {tab === "Audio" && (
         <View style={styles.games__body}>
-          <View style={styles.games__body__content_list}>
-            {content.audio.content.map((content, index) => (
-              <View key={index} style={styles.games__body__content_element}>
-                <Text style={styles.text__bold}>№{index + 1} Аудио</Text>
-                <WebView
-                  source={{ url: content }}
-                  scrollEnabled={false}
-                  bounces={false}
-                  style={{ height: 60, borderRadius: 25 }}
-                  javaScriptEnabled={true}
-                  mediaPlaybackRequiresUserAction={true}
-                  allowsInlineMediaPlayback={true}
-                  injectedJavaScript={INJECTEDJAVASCRIPT}
-                />
-                <Text></Text>
+          <View style={[styles.games__body__content_list]}>
+            {audioContent.map((content, index) => (
+              <View key={index} style={{display: 'flex', flexDirection: 'row', alignItems: 'center', paddingBottom: 20, marginBottom: 20, borderBottomColor: 'rgba(119, 31, 152)', borderBottomWidth: 2}}>
+                 {!!(index % 2) ? <View style={{alignItems: 'flex-start', marginTop: 'auto'}}>
+                  <Text style={styles.text__bold}>№{index + 1}</Text>
+                  <Text style={styles.text__bold}>Қосымша</Text>
+                </View>
+                : null}
+              <View key={index} style={[styles.games__body__content_element, {width: '70%'}, !(index % 2) ? { marginRight: 'auto' } : { marginLeft: 'auto' }]}>
+                <Text style={styles.text__bold}>"{content.name.split(' ')[3]}" сөзінің айтылуы</Text>
+                <View style={[{height: 150, overflow: 'hidden', borderRadius: 25}, !(index % 2) ? { borderBottomLeftRadius: 0, borderTopLeftRadius: 0} : { borderBottomRightRadius: 0, borderTopRightRadius: 0 }]}>
+                  <YoutubePlayer videoId={content.url} height= {170} />
+                </View>
+              </View>
+                {!(index % 2) ? <View style={{alignItems: 'flex-end', marginTop: 'auto'}}>
+                  <Text style={styles.text__bold}>№{index + 1}</Text>
+                  <Text style={styles.text__bold}>Қосымша</Text>
+                </View>
+                : null  
+              }
               </View>
             ))}
           </View>

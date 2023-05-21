@@ -50,7 +50,7 @@ export default function Product({isAuth}) {
                 <TouchableOpacity style={styles.products__button} onPress={()=>navigate('/products')}>
                     <View style={styles.products__icon_main}>
                         <Image style={styles.products__icon} source={require('../assets/courses.png')} />
-                        <Text style={[styles.products__icon__text]}>Курстар</Text>
+                        <Text style={[styles.products__icon__text]}>Пайдалы әдебиеттер</Text>
                     </View>
                 </TouchableOpacity>
             </View> 

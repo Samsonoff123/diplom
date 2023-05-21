@@ -26,6 +26,10 @@ const userSlice = createSlice({
     reducers: {
         logout: (state) => {
             state.items = false
+        },
+        updateProgress: (state, action) => {
+            console.log(action);
+            state.items.user.progress = action.payload
         }
     },
     extraReducers: {
@@ -46,4 +50,4 @@ const userSlice = createSlice({
 
 export const usersReducer = userSlice.reducer
 
-export const { logout } = userSlice.actions
+export const { logout, updateProgress } = userSlice.actions

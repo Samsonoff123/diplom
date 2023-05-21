@@ -40,7 +40,6 @@ const ProductCard = () => {
       <View style={styles.content}>
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.description}>{description}</Text>
-        <Text style={styles.price}>{price} $</Text>
       </View>
       <Image style={styles.sheldon__image} source={require('../assets/sheldonbg.png')} />
     </View>
