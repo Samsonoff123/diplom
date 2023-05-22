@@ -101,6 +101,8 @@ export const styles = StyleSheet.create({
   text__profile: {
     fontSize: 16,
     marginBottom: 5,
+    textAlign: 'left',
+    width: 200
   },
   text__b: {
     fontSize: 16,
